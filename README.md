@@ -23,7 +23,7 @@ _All my Kubernetes master and worker nodes below are running bare metal Ubuntu 2
 
 | Device                  | Count | OS Disk Size | Data Disk Size      | Ram  | Purpose                       |
 |-------------------------|-------|--------------|---------------------|------|-------------------------------|
-| Intel NUC10i5BEH        | 3     | 240GB SSD    | 1TB NVMe (longhorn) | 16GB | Kubernetes k3s masters        |
+| Intel NUC10i5FNH2       | 3     | 240GB SSD    | 1TB NVMe (longhorn) | 16GB | Kubernetes k3s masters        |
 | HP Microserver Gen7     | 1     | 240GB SSD    | 4x1TB RAID6         | 4GB  | Media and shared file storage |
 
 ## :handshake:&nbsp; Thanks
