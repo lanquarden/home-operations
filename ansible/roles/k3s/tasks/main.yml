@@ -4,13 +4,14 @@
   tags:
   - kubeconfig
 
-- include: meta.yml
-  tags:
-  - meta
+# Not sure if needed
+#- include: meta.yml
+#  tags:
+#  - meta
 
-- include: prometheus-operator-crds.yml
-  tags:
-  - prometheus-operator-crds
+#- include: prometheus-operator-crds.yml
+#  tags:
+#  - prometheus-operator-crds
 
 - include: registry.yml
   when: (registry.cache.enabled is defined 
@@ -20,11 +21,11 @@
   tags:
   - registry
 
-- include: cni-calico.yml
-  when:
-  - k3s_control_node is defined
-  - k3s_control_node
-  - calico.enabled is defined 
-  - calico.enabled
-  tags:
-  - cni-calico
+#- include: cni-calico.yml
+#  when:
+#  - k3s_control_node is defined
+#  - k3s_control_node
+#  - calico.enabled is defined 
+#  - calico.enabled
+#  tags:
+#  - cni-calico

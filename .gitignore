@@ -1,3 +1,4 @@
+*.swp
 *.vdi
 *.log
 .vagrant

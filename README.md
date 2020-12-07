@@ -23,10 +23,11 @@ _All my Kubernetes master and worker nodes below are running bare metal Ubuntu 2
 
 | Device                  | Count | OS Disk Size | Data Disk Size      | Ram  | Purpose                       |
 |-------------------------|-------|--------------|---------------------|------|-------------------------------|
-| Intel NUC8i3BEK         | 1     | 256GB NVMe   | N/A                 | 16GB | Kubernetes k3s Master         |
-| Intel NUC8i5BEH         | 3     | 120GB SSD    | 1TB NVMe (longhorn) | 32GB | Kubernetes k3s Workers        |
-| Intel NUC8i7BEH         | 2     | 750GB SSD    | 1TB NVMe (longhorn) | 64GB | Kubernetes k3s Workers        |
-| Qnap NAS (rocinante)    | 1     | N/A          | 8x12TB RAID6        | 16GB | Media and shared file storage |
-| Synology NAS (serenity) | 1     | N/A          | 8x12TB RAID6        | 4GB  | Media and shared file storage |
+| Intel NUC10i5BEH        | 3     | 240GB SSD    | 1TB NVMe (longhorn) | 16GB | Kubernetes k3s masters        |
+| HP Microserver Gen7     | 1     | 240GB SSD    | 4x1TB RAID6         | 4GB  | Media and shared file storage |
+
+## :handshake:&nbsp; Thanks
+
+Forked from onedr0p's [home operations](https://github.com/onedr0p/home-operations) and adapted for a 3 node HA cluster
 
 ---
