@@ -7,7 +7,7 @@
 <br />
 <div align="center">
 
-[![Discord](https://img.shields.io/badge/discord-chat-7289DA.svg?maxAge=60&style=flat-square)](https://discord.gg/DNCynrJ) [![GitHub stars](https://img.shields.io/github/stars/onedr0p/home-operations?color=green&style=flat-square)](https://github.com/onedr0p/home-operations/stargazers) [![GitHub issues](https://img.shields.io/github/issues/onedr0p/home-operations?style=flat-square)](https://github.com/onedr0p/home-operations/issues) [![GitHub last commit](https://img.shields.io/github/last-commit/onedr0p/home-operations?color=purple&style=flat-square)](https://github.com/onedr0p/home-operations/commits/master)
+[![GitHub stars](https://img.shields.io/github/stars/onedr0p/home-operations?color=green&style=flat-square)](https://github.com/lanquarden/home-operations/stargazers) [![GitHub issues](https://img.shields.io/github/issues/onedr0p/home-operations?style=flat-square)](https://github.com/lanquarden/home-operations/issues) [![GitHub last commit](https://img.shields.io/github/last-commit/onedr0p/home-operations?color=purple&style=flat-square)](https://github.com/lanquarden/home-operations/commits/main)
 
 </div>
 
