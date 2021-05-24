@@ -1,0 +1,39 @@
+---
+
+- name: samba | install packages
+  become: true
+  apt:
+    name: 
+      - libcephfs2
+      - samba
+      - samba-vfs-modules
+    install_recommends: false
+    update_cache: true
+    cache_valid_time: 3600
+    autoclean: true
+    autoremove: true
+  register: apt_install_samba
+  retries: 5
+  until: apt_install_samba is success
+
+- name: samba | set smbusers
+  become: true
+  copy:
+    content: |
+      nobody = guest
+    dest: /etc/samba/smbusers
+    mode: '0644'
+
+- name: samba | set smb.conf
+  become: true
+  template:
+    src: smb.conf.j2
+    dest: /etc/samba/smb.conf
+    mode: '0644'
+
+- name: samba | set and reload service
+  become: true
+  systemd:
+    name: smbd
+    enabled: true
+    state: restarted

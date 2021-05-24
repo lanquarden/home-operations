@@ -1,0 +1,24 @@
+---
+
+samba:
+  shares:
+    - name: documents
+      ceph_path: '/documents/'
+      public: true
+      read_only: true
+      guest_only: true
+    - name: media
+      ceph_path: '/media/'
+      public: true
+      read_only: true
+      guest_only: true
+    - name: unsorted
+      ceph_path: '/unsorted/'
+      public: true
+      read_only: true
+      guest_only: true
+    - name: frigate
+      ceph_path: '/frigate/'
+      public: true
+      read_only: true
+      guest_only: true

@@ -1,0 +1,17 @@
+[global]
+security = user
+map to guest = Bad User
+username map = /etc/samba/smbusers
+
+{% for smb_share in samba.shares %}
+[{{ smb_share.name }}]
+vfs objects = ceph
+path = {{ smb_share.ceph_path }}
+kernel share modes = no
+public = {{ 'yes' if smb_share.public else 'no' }}
+read only = {{ 'yes' if smb_share.read_only else 'no' }}
+guest only = {{ 'yes' if smb_share.guest_only else 'no' }}
+ceph:user_id = lanquarden
+ceph:config_file = /etc/ceph/ceph.conf
+
+{% endfor %}

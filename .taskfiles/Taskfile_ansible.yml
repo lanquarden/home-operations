@@ -55,7 +55,7 @@ tasks:
     vars:
       HARD: "{{.HARD}}"
 
-  playbook:storage:ceph:
-    desc: Run the Ceph playbook across the storage nodes
+  playbook:storage:
+    desc: Run the storage playbook across the storage nodes
     cmds:
-    - ansible-playbook -i {{.STORAGE_HOSTS}} ./ansible/playbooks/ceph.yml
+    - ansible-playbook -i {{.STORAGE_HOSTS}} ./ansible/playbooks/storage.yml

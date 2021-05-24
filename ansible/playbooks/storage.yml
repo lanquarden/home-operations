@@ -1,0 +1,12 @@
+---
+# playbook for preparing and installing ceph storage cluster
+
+  - hosts:
+      - all
+    become: true
+    gather_facts: true
+    roles:
+      #      - role: os
+      #      - role: ceph
+      - role: samba
+        when: "'master' in group_names"
