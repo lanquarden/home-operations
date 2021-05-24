@@ -1,0 +1,4 @@
+---
+
+# set ansible user for hosts
+ansible_user: lanquarden

@@ -1,0 +1,10 @@
+---
+# playbook for preparing and installing ceph cluster
+
+  - hosts:
+      - all
+    become: true
+    gather_facts: true
+    roles:
+      - os
+      - ceph

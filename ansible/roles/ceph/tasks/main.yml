@@ -1,0 +1,11 @@
+---
+
+- name: ceph | add SSH public keys
+  ansible.posix.authorized_key:
+    user: "root"
+    key: "{{ item }}"
+  loop: "{{ ceph.ssh_authorized_keys }}"
+  when:
+  - ceph.ssh_authorized_keys is defined
+  - ceph.ssh_authorized_keys is iterable
+  - ceph.ssh_authorized_keys | length > 0

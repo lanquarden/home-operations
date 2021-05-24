@@ -2,8 +2,10 @@
 version: '3'
 
 vars:
-  ANSIBLE_HOSTS: ./ansible/inventory/cluster/hosts.yml
-  ANSIBLE_GROUPS: master:worker
+  CLUSTER_HOSTS: ./ansible/inventory/cluster/hosts.yml
+  CLUSTER_GROUPS: master:worker
+  STORAGE_HOSTS: ./ansible/inventory/storage/hosts.yml
+  STORAGE_GROUPS: master:worker
 
 tasks:
 
@@ -13,42 +15,47 @@ tasks:
     - ansible-galaxy install -r requirements.yml
 
   ping:
-    desc: Ping all the k8s nodes
+    desc: Ping all the managed nodes
     cmds:
-    - ansible {{.ANSIBLE_GROUPS}} -i {{.ANSIBLE_HOSTS}} --one-line -m ping 
+    - ansible {{.CLUSTER_GROUPS}} -i {{.CLUSTER_HOSTS}} -i {{.STORAGE_HOSTS}} --one-line -m ping 
 
   list:
     desc: List all the k8s nodes
     cmds:
-    - ansible {{.ANSIBLE_GROUPS}} -i {{.ANSIBLE_HOSTS}} --list-hosts
+    - ansible {{.CLUSTER_GROUPS}} -i {{.CLUSTER_HOSTS}} --list-hosts
 
-  playbook:os:
+  playbook:cluster:os:
     desc: Run the OS playbook across the k8s nodes
     cmds:
-    - ansible-playbook -i {{.ANSIBLE_HOSTS}} ./ansible/playbooks/os.yml
+    - ansible-playbook -i {{.CLUSTER_HOSTS}} ./ansible/playbooks/os.yml
 
-  playbook:k3s:
+  playbook:cluster:k3s:
     desc: Run the k3s playbook across the k8s nodes
     cmds:
-    - ansible-playbook -i {{.ANSIBLE_HOSTS}} ./ansible/playbooks/k3s-{{if eq .UPGRADE "true"}}upgrade{{else}}install{{end}}.yml
+    - ansible-playbook -i {{.CLUSTER_HOSTS}} ./ansible/playbooks/k3s-{{if eq .UPGRADE "true"}}upgrade{{else}}install{{end}}.yml
     vars:
       UPGRADE: "{{.UPGRADE}}"
 
-  playbook:nuke:k3s:
+  playbook:cluster:nuke:k3s:
     desc: Run the k3s-nuke playbook across the k8s nodes
     cmds:
-    - ansible-playbook -i {{.ANSIBLE_HOSTS}} ./ansible/playbooks/k3s-nuke.yml
+    - ansible-playbook -i {{.CLUSTER_HOSTS}} ./ansible/playbooks/k3s-nuke.yml
 
-  reboot:
+  reboot:cluster:
     desc: Reboot all the k8s nodes
     cmds:
-    - ansible {{.ANSIBLE_GROUPS}} -i {{.ANSIBLE_HOSTS}} -b -m shell -a "/sbin/shutdown -r {{if eq .HARD "true"}}now{{else}}1{{end}}"
+    - ansible {{.CLUSTER_GROUPS}} -i {{.CLUSTER_HOSTS}} -b -m shell -a "/sbin/shutdown -r {{if eq .HARD "true"}}now{{else}}1{{end}}"
     vars:
       HARD: "{{.HARD}}"
 
-  shutdown:
+  shutdown:cluster:
     desc: Shutdown all the k8s nodes
     cmds:
-    - ansible {{.ANSIBLE_GROUPS}} -i {{.ANSIBLE_HOSTS}} -b -m shell -a "/sbin/shutdown -h {{if eq .HARD "true"}}now{{else}}1{{end}}"
+    - ansible {{.CLUSTER_GROUPS}} -i {{.CLUSTER_HOSTS}} -b -m shell -a "/sbin/shutdown -h {{if eq .HARD "true"}}now{{else}}1{{end}}"
     vars:
       HARD: "{{.HARD}}"
+
+  playbook:storage:ceph:
+    desc: Run the Ceph playbook across the storage nodes
+    cmds:
+    - ansible-playbook -i {{.STORAGE_HOSTS}} ./ansible/playbooks/ceph.yml

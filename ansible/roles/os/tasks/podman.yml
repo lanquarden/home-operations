@@ -1,0 +1,28 @@
+---
+
+- name: podman | install
+  become: true
+  block:
+    - name: podman | add repository key
+      ansible.builtin.apt_key:
+        url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/Release.key
+        state: present
+
+    - name: podman | add repository
+      ansible.builtin.apt_repository:
+        repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/ /"
+        state: present
+        filename: "devel:kubic:libcontainers:stable.list"
+
+    - name: podman | install
+      apt:
+        name: podman
+        update_cache: yes
+        autoclean: yes
+        autoremove: yes
+      register: apt_install_podman
+      retries: 5
+      until: apt_install_podman is success
+  when:
+    - podman is defined
+    - podman

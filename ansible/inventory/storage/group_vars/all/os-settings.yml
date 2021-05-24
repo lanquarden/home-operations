@@ -1,0 +1,4 @@
+---
+
+# enable podman installation
+podman: true

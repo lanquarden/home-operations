@@ -1,0 +1,4 @@
+---
+
+# IP address of node
+ansible_host: "storone.lanquarden.com"

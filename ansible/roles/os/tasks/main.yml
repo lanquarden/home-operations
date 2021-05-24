@@ -1,44 +1,24 @@
 ---
 
-- include: host.yml
+- include: user.yml
   tags:
-  - host
-
-- include: time.yml
-  tags:
-  - time
+  - user
 
 - include: packages.yml
   tags:
   - packages
 
-- include: power-button.yml
-  tags:
-  - power-button
+    # - include: kernel.yml
+    #   tags:
+    #   - kernel
 
-- include: motd.yml
+- include: podman.yml
   tags:
-  - motd
-
-- include: kernel.yml
-  tags:
-  - kernel
-
-- include: network.yml
-  tags:
-  - network
-
-- include: filesystem.yml
-  tags:
-  - filesystem
+  - podman
 
 - include: unattended-upgrades.yml
   tags:
   - unattended-upgrades
-
-- include: user.yml
-  tags:
-  - user
 
 - include: rsyslog.yml
   when:
