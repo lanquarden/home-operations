@@ -1,0 +1,65 @@
+---
+
+- name: dev | add fish repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: ppa:fish-shell/release-3
+    state: present
+
+- name: dev | install fish
+  become: true
+  apt:
+    name: fish
+    install_recommends: false
+    update_cache: true
+    cache_valid_time: 3600
+    autoclean: true
+    autoremove: true
+  register: apt_install_fish
+  retries: 5
+  until: apt_install_fish
+
+  #- name: dev | install chezmoi
+  #  become: true
+  #  apt:
+  #    deb: "https://github.com/twpayne/chezmoi/releases/tag/v{{ dev.chezmoi_ver }}/chezmoi_{{ dev.chezmoi_ver }}_linux_amd64.deb"
+  #    force: true
+  #  register: apt_install_fish
+  #  retries: 5
+  #  until: apt_install_fish
+
+- name: dev | set fish as default shell
+  become: yes
+  user:
+    name: lanquarden
+    shell: /usr/bin/fish
+
+- name: dev | download and unzip 1password cli
+  unarchive:
+    src: https://cache.agilebits.com/dist/1P/op/pkg/v1.10.0/op_linux_amd64_v1.10.0.zip
+    remote_src: yes
+    dest: /usr/local/bin/
+    mode: '0755'
+
+- name: dev | chezmoi init
+  shell:
+    chdir: /home/lanquarden
+    cmd: chezmoi init https://github.com/lanquarden/dotfiles.git
+
+- name: dev | create chezmoi config directory
+  file:
+    path: /home/lanquarden/.config/chezmoi
+    state: directory
+
+- name: dev | create chezmoi config
+  copy:
+    content: |
+      encryption: gpg
+      gpg:
+        recipient: lanquarden@gmail.com
+    dest: /home/lanquarden/.config/chezmoi/chezmoi.yaml
+
+- name: dev | chezmoi apply
+  shell:
+    chdir: /home/lanquarden
+    cmd: chezmoi apply

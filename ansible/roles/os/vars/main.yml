@@ -38,6 +38,7 @@ packages:
   - bat
   - delta
   - smartmontools
+  - ceph-common
   apt_remove:
   - apparmor
   - apport
@@ -57,7 +58,7 @@ packages:
   - plymouth
   - plymouth-theme-ubuntu-text
   - popularity-contest
-  - snapd
+    #- snapd
   - sosreport
   - ubuntu-advantage-tools
   - ufw

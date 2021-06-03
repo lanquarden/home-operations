@@ -9,3 +9,19 @@
   - ceph.ssh_authorized_keys is defined
   - ceph.ssh_authorized_keys is iterable
   - ceph.ssh_authorized_keys | length > 0
+
+- name: ceph | create CephFS mount point
+  become: true
+  file:
+    path: /media/ceph/
+    state: directory
+    mode: 0755
+
+- name: ceph | mount CephFS
+  become: true
+  ansible.posix.mount:
+    src: storone,stortwo:/
+    path: /media/ceph/
+    opts: name=lanquarden
+    fstype: ceph
+    state: mounted

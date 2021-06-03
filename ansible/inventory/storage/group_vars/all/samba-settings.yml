@@ -5,20 +5,24 @@ samba:
     - name: documents
       ceph_path: '/documents/'
       public: true
-      read_only: true
-      guest_only: true
+      read_only: false
+      guest_only: false
+      guest_ok: true
     - name: media
       ceph_path: '/media/'
       public: true
-      read_only: true
-      guest_only: true
+      read_only: false
+      guest_only: false
+      guest_ok: true
     - name: unsorted
       ceph_path: '/unsorted/'
       public: true
-      read_only: true
-      guest_only: true
+      read_only: false
+      guest_only: false
+      guest_ok: true
     - name: frigate
       ceph_path: '/frigate/'
       public: true
-      read_only: true
-      guest_only: true
+      read_only: false
+      guest_only: false
+      guest_ok: true

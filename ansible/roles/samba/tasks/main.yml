@@ -20,7 +20,7 @@
   become: true
   copy:
     content: |
-      nobody = guest
+      lanquarden = guest
     dest: /etc/samba/smbusers
     mode: '0644'
 

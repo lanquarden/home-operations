@@ -1,0 +1,10 @@
+---
+# playbook for adding basic dev environment to linux systems
+
+  - hosts:
+      - superpower
+    become: true
+    gather_facts: true
+    roles:
+      #      - role: os
+      - role: dev

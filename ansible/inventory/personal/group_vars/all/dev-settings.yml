@@ -1,0 +1,6 @@
+---
+
+# dev role settings
+
+dev:
+  chezmoi_ver: 2.0.13
